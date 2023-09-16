@@ -1,0 +1,105 @@
+aside .sidebar{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #f2f2f2; */
+    background-color: white;
+    margin: 0 10px;
+    border-radius: 15px;
+    height: 88vh;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar a{
+    text-decoration: none;
+    box-sizing: border-box;
+    color: black;
+}
+
+.logo{
+    display: block;
+    height: 4rem;
+    width: 4rem;
+    object-fit: cover;
+}
+
+.company-name{
+    align-self: center;
+    color: rgb(37, 114, 101);
+}
+
+.side-nav{
+    height: 100vh;
+    width: 15%;
+    padding: 10px;
+}
+
+aside .toggle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+aside .logo{
+    display: flex;
+    gap: 0.5 rem;
+}
+
+.close{
+    display: none;
+}
+
+aside .sidebar-signout, .sidebar a{
+    display: flex;
+    align-items: center;
+    color: black;
+    height: 3.2rem;
+    gap: 1rem;
+    position: relative;
+    margin-left: 2rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a svg{
+    margin-right: 4px;
+}
+
+aside .sidebar-signout, .sidebar a span{
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-signout{
+cursor: pointer;
+margin-top: auto;
+}
+
+aside .sidebar a.active{
+    width: 100%;
+    color: rgb(70 182 164 / 72%);
+    background-color: #c0c0c073;
+    margin-left: 0;
+}
+
+aside .sidebar a.active::before{
+    content: '';
+    width: 6px;
+    height: 18px;
+    background-color: rgb(70 182 164 / 72%);
+}
+
+aside .sidebar a.active span{
+    color: rgb(70 182 164);
+    margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar a:hover{
+    color: rgb(70 182 164);
+    
+}
+
+aside .sidebar a:hover span{
+    margin-left: 0.6rem;
+}

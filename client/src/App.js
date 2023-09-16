@@ -4,6 +4,7 @@ import Home from './Components/Home'
 import Missing from './Components/Missing'
 import Unauthorized from './Components/Unauthorized'
 import RequireAuth from './Components/RequireAuth'
+import Profile from './Components/Profile'
 import {Routes, Route} from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
@@ -23,6 +24,7 @@ function App() {
         
         <Route element={<RequireAuth />}>
           <Route path='/home' element={<Home />} />
+          <Route path='/profile' element={<Profile />} />
         </Route>
         {/* 404 Page */}
         <Route path='*' element={<Missing />} />

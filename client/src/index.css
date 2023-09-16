@@ -8,14 +8,24 @@ body{
   justify-content: center; 
   font-family: 'DM Sans', sans-serif !important;
   box-sizing: border-box;
-  background: linear-gradient(110deg, #f2f2f2, #b7b52e52);
+  /* background: linear-gradient(-110deg, #f2f2f2, #b7b52e52); */
+  /* background: linear-gradient(-20deg, #36583bd6, #aacec752); */
+  background: linear-gradient(-20deg, #7c948899, #c7d2d052);
+  /* background: linear-gradient(-110deg, #f2f2f2, #59b72e94); */
 }
 
 .App {
+  height: 100vh;
+  width: 100vw; 
+}
+
+.App-auth {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw; 
+  align-items: center; 
+}
+
+.testingClass{
+  overflow: auto;
 }

@@ -1,0 +1,53 @@
+.color {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.swatch {
+  padding: 5px;
+  background: #fff;
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  cursor: pointer;
+  width: 15%;
+  height: 40px;
+}
+
+.popover {
+  position: absolute;
+  z-index: 2;
+}
+
+.cover {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.add-event-body {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.add-event-body-item {
+  margin: 10px !important;
+}
+
+.pick-color {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.pick-color p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0 10px;
+}
