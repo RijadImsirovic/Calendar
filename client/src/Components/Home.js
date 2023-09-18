@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import Nav from './Nav'
 import { Paper } from '@mui/material'
 import './Home.css';
+import TopSection from './TopSection'
 
 const Home = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -22,7 +23,7 @@ const Home = () => {
       <Nav signOut={signOut}/>
       <div className="home-content-container">
         <div className="top-section">
-          <Paper className='mario box-1' elevation={7}>Box 1</Paper>
+        <TopSection />
         </div>
         <div className="middle-section">
           <Paper className='mario box-2' elevation={7}>Box 2</Paper>

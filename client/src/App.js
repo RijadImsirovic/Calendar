@@ -7,6 +7,8 @@ import RequireAuth from './Components/RequireAuth'
 import Profile from './Components/Profile'
 import {Routes, Route} from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+import ConnectionsPage from './Components/Connections'
+import UserProfile from './Components/UserProfile'
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -25,6 +27,8 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path='/home' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/:username' element={<UserProfile />} />
+          <Route path='/connections' element={<ConnectionsPage />} />
         </Route>
         {/* 404 Page */}
         <Route path='*' element={<Missing />} />

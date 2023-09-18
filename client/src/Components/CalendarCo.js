@@ -21,7 +21,8 @@ import { Cookies, useCookies } from "react-cookie";
 const localizer = dayjsLocalizer(dayjs);
 const DnDCalendar = withDragAndDrop(Calendar);
 
-export default function CalendarCo() {
+export default function CalendarCo({ email }) {
+  console.log(email);
   const [cookies, setCookie, removeCookie] = useCookies(["Email"]);
   const authToken = cookies.AuthToken;
   const userEmail = cookies.Email;
@@ -52,7 +53,7 @@ export default function CalendarCo() {
       startDate: startDate,
       endDate: endDate,
       color: color,
-      email: cookies.Email,
+      email: email,
     });
 
     setEvents([
@@ -73,7 +74,7 @@ export default function CalendarCo() {
 
   const getEvents = async () => {
     try {
-      const url = `/getEvents/${userEmail}`; 
+      const url = `/getEvents/${email}`; 
 
       const response = await axios.get(url);
       console.log(response.data.events)

@@ -172,10 +172,6 @@ flex: 1;
     color: #f2f2f2 !important;
 }
 
-input, textarea{
-    /* background-color: white !important; */
-}
-
 label.Description123+div{
     background-color: white !important;
 }
@@ -234,4 +230,13 @@ margin: 20px 0;
 
 .add-availability{
     color: #f2f2f2 !important;
+}
+
+.connection-container{
+    display: flex;
+    justify-content: center;
+}
+
+.connection-container button{
+    margin: 0 20px
 }

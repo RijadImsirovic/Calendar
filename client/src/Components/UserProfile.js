@@ -5,7 +5,7 @@ import Nav from "./Nav";
 import CalendarCo from "./CalendarCo";
 import { Paper } from "@mui/material";
 import "./Home.css";
-import "./Profile.css";
+import "./UserProfile.css";
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { TabContext } from "@mui/lab";
@@ -35,8 +35,13 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import axios from "../api/axios";
 import Modal from "react-bootstrap/Modal";
 import TopSection from "./TopSection";
+import { useParams } from "react-router-dom";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import ClearIcon from "@mui/icons-material/Clear";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
-const Profile = () => {
+const UserProfile = () => {
+  const { username } = useParams();
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const location = useLocation();
   console.log(location);
@@ -49,8 +54,8 @@ const Profile = () => {
   let userName = cookies.Name;
   let userEmail = cookies.Email;
 
-  const [name, setName] = useState(userName);
-  const [email, setEmail] = useState(userEmail);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [backupDesc, setBackupDesc] = useState("");
   const [publicCalendar, setPublicCalendar] = useState(false);
@@ -59,8 +64,59 @@ const Profile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imageData, setImageData] = useState(null);
   const [value, setValue] = React.useState("1");
+  const [isFriend, setIsFriend] = useState(null);
+  const [reqSent, setReqSent] = useState(null);
+  const [reqStatus, setReqStatus] = useState("");
 
   const firstToggle = false;
+
+  // ------------------------------- FRIENDS ------------------------------------
+
+  const sendFriendRequest = async () => {
+    console.log(username);
+    const response = await axios.post("/sendFriendRequest", {
+      senderId: cookies.Email,
+      receiverId: username,
+    });
+    console.log(response);
+    setReqSent(1);
+  };
+
+  const getFriendRequestInfo = async () => {
+    try {
+      const url = `/getFriendRequestInfo/${cookies.Email}/${username}`;
+
+      const response = await axios.get(url);
+      console.log(response);
+
+      if (response.data.friendship.length === 0) {
+        setIsFriend(0);
+      } else {
+        setIsFriend(1);
+      }
+
+      if (response.data.request.length === 0) {
+        setReqSent(0);
+      } else {
+        setReqSent(1);
+        setReqStatus(response.data.request[0].status)
+      }
+
+      console.log(isFriend);
+      console.log(reqSent);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const cancelFriendRequest = async () => {
+    const response = await axios.post("/cancelFriendRequest", {
+      senderId: cookies.Email,
+      receiverId: username,
+    });
+
+    setReqSent(0);
+  };
 
   // ---------------------------- Account Details ----------------------------
 
@@ -109,7 +165,7 @@ const Profile = () => {
 
   const getProfilePicture = async () => {
     try {
-      const url = `/getImage/${userEmail}`;
+      const url = `/getImage/${username}`;
 
       const response = await axios.get(url, {
         responseType: "arraybuffer", // Indicate that the response is binary data
@@ -129,9 +185,13 @@ const Profile = () => {
 
   const getProfileSettings = async () => {
     try {
-      const url = `/getProfileSettings/${userEmail}`;
+      const url = `/getProfileSettings/${username}`;
 
       const response = await axios.get(url);
+      console.log(response);
+
+      setName(response.data.basicSettings[0].name);
+      setEmail(response.data.basicSettings[0].email);
 
       setDescription(response.data.profileSettings[0].profile_description);
       setBackupDesc(response.data.profileSettings[0].profile_description);
@@ -147,6 +207,7 @@ const Profile = () => {
   useEffect(() => {
     getProfilePicture();
     getProfileSettings();
+    getFriendRequestInfo();
   }, []);
 
   //----------------------------  AVAILABILITY ----------------------------
@@ -173,7 +234,6 @@ const Profile = () => {
     const updatedAvailability = [...availability];
     updatedAvailability[index][field] = value;
     setAvailability(updatedAvailability);
-    console.log(availability)
   };
 
   // ---------------------------- THEME ----------------------------
@@ -246,46 +306,6 @@ const Profile = () => {
                       // src={logo}
                       src={`data:image/jpeg;base64,${imageData}`}
                     />
-                    <Button
-                      className="change-profile-image"
-                      variant="outlined"
-                      onClick={() => setModalShow(true)}
-                    >
-                      <EditIcon /> Change profile image
-                    </Button>
-
-                    <Modal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                      size="lg"
-                      className="add-event"
-                      aria-labelledby="contained-modal-title-vcenter"
-                      centered
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-vcenter">
-                          Upload a profile picture
-                        </Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body className="add-profile-picture">
-                        <form
-                          onSubmit={(e) => handleImageSubmit(e)}
-                          encType="multipart/form-data"
-                        >
-                          <input
-                            type="file"
-                            name="avatar"
-                            onChange={handleFileChange}
-                          />
-                          <input type="submit" />
-                        </form>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button onClick={() => setModalShow(false)}>
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
                   </div>
                   <div className="basic-info">
                     <List className="basic-info-list">
@@ -311,27 +331,65 @@ const Profile = () => {
                       </ListItem>
                     </List>
                   </div>
-                  <div className="connection-container"></div>
+                  <div className="connection-container">
+                    {isFriend === 1 ? (
+                      ""
+                    ) : reqSent === 1 && reqStatus !== "rejected" ? (
+                      <>
+                        <ThemeProvider theme={theme}>
+                          <Fab
+                            className="add-availability"
+                            color="primary"
+                            aria-label="add"
+                            onClick={cancelFriendRequest}
+                          >
+                            <ClearIcon />
+                          </Fab>
+                        </ThemeProvider>
+                        {/* <ThemeProvider theme={greenTheme}>
+                          <Fab
+                            className="add-availability"
+                            color="primary"
+                            aria-label="add"
+                            onClick={handleAddAvailability}
+                          >
+                            <HowToRegIcon />
+                          </Fab>
+                        </ThemeProvider> */}
+                      </>
+                    ) : (
+                      <ThemeProvider theme={greenTheme}>
+                        <Fab
+                          className="add-availability"
+                          color="primary"
+                          aria-label="add"
+                          onClick={sendFriendRequest}
+                        >
+                          <PersonAddIcon />
+                        </Fab>
+                      </ThemeProvider>
+                    )}
+                  </div>
                   {/* </div> */}
                 </Paper>
                 <Paper className="edit-details" elevation={10}>
                   <div className="edit-details-title">
-                    <h2>Edit account information</h2>
+                    <h2>Basic account information</h2>
                   </div>
                   <div className="edit-main-container">
                     <TextField
                       label="Name"
                       id="name-field"
-                      defaultValue={name}
-                      onChange={(e) => setName(e.target.value)}
+                      value={name}
                       variant="outlined"
+                      disabled
                     />
                     <TextField
                       label="Email"
                       id="filled-size-normal"
-                      defaultValue={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
                       variant="outlined"
+                      disabled
                     />
                     <TextField
                       className="Description123"
@@ -341,39 +399,8 @@ const Profile = () => {
                       rows={5}
                       onChange={(e) => setDescription(e.target.value)}
                       defaultValue={description}
+                      disabled
                     />
-                    <Button className="change-password" variant="outlined">
-                      <EditIcon /> Change password
-                    </Button>
-                    <h3 className="additional-settings-title">
-                      Additional settings
-                    </h3>
-                    <FormControlLabel
-                      className="public-switch"
-                      control={
-                        <Switch
-                          defaultChecked={publicCalendar}
-                          onClick={(e) => setPublicCalendar(!publicCalendar)}
-                        />
-                      }
-                      label="Allow people other than your connections to view your calendar"
-                    />
-                  </div>
-                  <div className="edit-buttons-container">
-                    {name !== userName ||
-                    description !== backupDesc ||
-                    publicCalendar != backupCal ||
-                    email !== userEmail ? (
-                      <Button
-                        className="change-password"
-                        variant="outlined"
-                        onClick={handleInfoChange}
-                      >
-                        Save edit
-                      </Button>
-                    ) : (
-                      ""
-                    )}
                   </div>
                 </Paper>
                 {/* <div className="edit-details"></div> */}
@@ -482,7 +509,7 @@ const Profile = () => {
 
               <TabPanel value="3" index={2}>
                 {/* Item Three */}
-                <CalendarCo email={email}/>
+                <CalendarCo email={email} />
               </TabPanel>
             </TabContext>
           </Paper>
@@ -492,4 +519,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;

@@ -1,0 +1,27 @@
+.connections-content-container{
+    flex-direction: column;
+    width: 85%;
+}
+
+.main-connections-container{
+    padding: 30px 120px;
+}
+
+.profile-tabs{
+    height: 85%;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.search-input div:first-child{
+    border-radius: 25px
+}
+
+.toolbar-search{
+    width: 35%;
+}
+
+.connection-tabs{
+    background: transparent !important;
+    box-shadow: none !important;
+}

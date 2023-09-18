@@ -32,7 +32,7 @@ const Nav = ({ signOut }) => {
             <Link to='/home' className={`${location.pathname == '/home' ? 'active' : ''}`}>
                 <span><HomeOutlinedIcon />Home</span>
             </Link>
-            <Link to='/home'>
+            <Link to='/connections' className={`${location.pathname == '/connections' ? 'active' : ''}`}>
                 <span><PeopleAltOutlinedIcon />Connections</span>
             </Link>
             <Link to='/home'>
