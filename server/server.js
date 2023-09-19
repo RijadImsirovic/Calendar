@@ -354,17 +354,34 @@ app.get("/getFriendRequestInfo/:sender/:receiver", async (req, res) => {
       [receiver]
     );
 
-    const friendship = await pool.query(
+    const friendship1 = await pool.query(
       `SELECT * FROM friendships WHERE user_id1 = $1 and user_id2 = $2`,
       [senderId.rows[0].id, receiverId.rows[0].id]
     );
 
-    const request = await pool.query(
+    const friendship = await pool.query(
+      `SELECT *
+      FROM friendships
+      WHERE (user_id1 = $1 AND user_id2 = $2)
+         OR (user_id1 = $2 AND user_id2 = $1);`,
+      [senderId.rows[0].id, receiverId.rows[0].id]
+    );
+
+    const sentRequest = await pool.query(
       `SELECT * FROM friend_requests WHERE sender_id = $1 and receiver_id = $2`,
       [senderId.rows[0].id, receiverId.rows[0].id]
     );
 
-    res.json({ friendship: friendship.rows, request: request.rows });
+    const receivedRequest = await pool.query(
+      `SELECT * FROM friend_requests WHERE sender_id = $2 and receiver_id = $1`,
+      [senderId.rows[0].id, receiverId.rows[0].id]
+    );
+
+    res.json({
+      friendship: friendship.rows,
+      sentRequest: sentRequest.rows,
+      receivedRequest: receivedRequest.rows,
+    });
   } catch (err) {
     console.error(err);
     if (err) {
@@ -423,6 +440,33 @@ app.post("/cancelFriendRequest", async (req, res) => {
   }
 });
 
+app.post("/removeFriend", async (req, res) => {
+  try {
+    const { senderId, receiverId } = req.body;
+
+    const sender = await pool.query(`SELECT * FROM users WHERE email = $1`, [
+      senderId,
+    ]);
+
+    const receiver = await pool.query(`SELECT * FROM users WHERE email = $1`, [
+      receiverId,
+    ]);
+
+    const query = await pool.query(
+      `DELETE FROM friendships
+      WHERE (user_id1 = $1 AND user_id2 = $2)
+         OR (user_id1 = $2 AND user_id2 = $1);
+      `,
+      [sender.rows[0].id, receiver.rows[0].id]
+    );
+
+    res.status(200).json({ message: "Friend request canceled successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error canceling friend request" });
+  }
+});
+
 app.post("/acceptFriendRequest", async (req, res) => {
   try {
     const { senderId, receiverId } = req.body;
@@ -444,7 +488,6 @@ app.post("/acceptFriendRequest", async (req, res) => {
       `DELETE FROM friend_requests WHERE sender_id = $1 AND receiver_id = $2`,
       [sender.rows[0].id, receiver.rows[0].id]
     );
-
 
     res.status(200).json({ message: "Friend request was accepted" });
   } catch (error) {
@@ -505,21 +548,32 @@ app.get("/getPersonalFriendRequestInfo/:email", async (req, res) => {
 
     const friendships = await pool.query(
       `SELECT
-      CASE
-          WHEN user_id1 = $1 THEN user_id2
-          ELSE user_id1
-      END AS friend_id,
-      u.name AS friend_username
-      FROM
-          friendships AS f
-      INNER JOIN
-          users AS u ON (user_id1 = u.id OR user_id2 = u.id)
-      WHERE
-      (user_id1 = $1 OR user_id2 = $1)`,
+      u1.name AS friend_name,
+      u1.email AS friend_email
+    FROM
+      friendships AS f
+    JOIN
+      users AS u1 ON f.user_id2 = u1.id
+    WHERE
+      f.user_id1 = $1
+    UNION ALL
+    SELECT
+      u2.name AS friend_name,
+      u2.email AS friend_email
+    FROM
+      friendships AS f
+    JOIN
+      users AS u2 ON f.user_id1 = u2.id
+    WHERE
+      f.user_id2 = $1;`,
       [userId.rows[0].id]
     );
 
-    res.json({ friendships: friendships.rows, sentRequests: sentRequests.rows, receivedRequests: receivedRequests.rows });
+    res.json({
+      friendships: friendships.rows,
+      sentRequests: sentRequests.rows,
+      receivedRequests: receivedRequests.rows,
+    });
   } catch (err) {
     console.error(err);
     if (err) {

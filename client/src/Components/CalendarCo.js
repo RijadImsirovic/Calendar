@@ -74,17 +74,21 @@ export default function CalendarCo({ email }) {
 
   const getEvents = async () => {
     try {
-      const url = `/getEvents/${email}`; 
+      const url = `/getEvents/${email}`;
 
       const response = await axios.get(url);
-      console.log(response.data.events)
+      console.log(response.data.events);
       if (response.data.detail) {
         setError(response.data.detail);
       } else {
         const formattedEvents = response.data.events.map((event) => ({
           ...event,
-          start: new Date(dayjs(event.start).format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ')),
-          end: new Date(dayjs(event.end).format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ')),
+          start: new Date(
+            dayjs(event.start).format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ")
+          ),
+          end: new Date(
+            dayjs(event.end).format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ")
+          ),
         }));
         setEvents(formattedEvents);
       }
@@ -102,10 +106,15 @@ export default function CalendarCo({ email }) {
 
   return (
     <div className="Calendar">
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Schedule an Event
-      </Button>
-
+      <div className="schedule-btn-container">
+        <Button
+          className="schedule-button"
+          variant="primary"
+          onClick={() => setModalShow(true)}
+        >
+          Schedule an Event
+        </Button>
+      </div>
       <Modal
         show={modalShow}
         onHide={() => setModalShow(false)}

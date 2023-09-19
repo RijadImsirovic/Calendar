@@ -51,3 +51,14 @@
   height: 100%;
   margin: 0 10px;
 }
+
+.schedule-btn-container {
+  text-align: end;
+  margin-bottom: 5px;
+}
+
+.schedule-button {
+  box-shadow: 0 0 0 0.2px !important;
+  border-radius: 25px !important;
+  color: #b64658 !important;
+}

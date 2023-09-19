@@ -25,3 +25,17 @@
     background: transparent !important;
     box-shadow: none !important;
 }
+
+.conn-action-btn{
+    margin: 10px !important;
+}
+
+.conn-avatar span{
+    display: flex;
+    align-items: center;
+
+}
+
+.conn-avatar-img{
+    margin-right: 15px;
+}

@@ -6,6 +6,7 @@ import Nav from './Nav'
 import { Paper } from '@mui/material'
 import './Home.css';
 import TopSection from './TopSection'
+import CalendarCo from './CalendarCo'
 
 const Home = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -26,11 +27,13 @@ const Home = () => {
         <TopSection />
         </div>
         <div className="middle-section">
-          <Paper className='mario box-2' elevation={7}>Box 2</Paper>
-          <div className="right-middle-section">
+          <Paper className='mario box-2' elevation={7}>
+            <CalendarCo email={cookies.Email}/>
+          </Paper>
+          {/* <div className="right-middle-section">
             <Paper className='mario box-3' elevation={7}>Box 3</Paper>
             <Paper className='mario box-4' elevation={7}>Box 4</Paper>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

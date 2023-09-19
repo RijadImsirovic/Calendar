@@ -67,8 +67,9 @@ const UserProfile = () => {
   const [isFriend, setIsFriend] = useState(null);
   const [reqSent, setReqSent] = useState(null);
   const [reqStatus, setReqStatus] = useState("");
+  const [recieveReq, setRecieveReq] = useState(null);
+  const [sentReq, setSentReq] = useState(null);
 
-  const firstToggle = false;
 
   // ------------------------------- FRIENDS ------------------------------------
 
@@ -78,7 +79,6 @@ const UserProfile = () => {
       senderId: cookies.Email,
       receiverId: username,
     });
-    console.log(response);
     setReqSent(1);
   };
 
@@ -95,29 +95,57 @@ const UserProfile = () => {
         setIsFriend(1);
       }
 
-      if (response.data.request.length === 0) {
+      if (response.data.receivedRequest.length === 0) {
         setReqSent(0);
+        setRecieveReq(0);
       } else {
         setReqSent(1);
-        setReqStatus(response.data.request[0].status)
+        setRecieveReq(1);
+        setReqStatus(response.data.request[0].status);
       }
 
-      console.log(isFriend);
-      console.log(reqSent);
+      if (response.data.sentRequest.length === 0) {
+        setSentReq(0);
+      } else {
+        setSentReq(1);
+      }
+
     } catch (err) {
       console.error(err);
     }
   };
 
-  const cancelFriendRequest = async () => {
+  const cancelFriendRequest = async (receiver) => {
     const response = await axios.post("/cancelFriendRequest", {
       senderId: cookies.Email,
-      receiverId: username,
+      receiverId: receiver,
     });
-
-    setReqSent(0);
+    getFriendRequestInfo();
   };
 
+  const rejectFriendRequest = async (sender, receiver) => {
+    const response = await axios.post("/cancelFriendRequest", {
+      senderId: sender,
+      receiverId: receiver,
+    });
+    getFriendRequestInfo();
+  };
+
+  const removeFriend = async (sender, receiver) => {
+    const response = await axios.post("/removeFriend", {
+      senderId: sender,
+      receiverId: receiver,
+    });
+    getFriendRequestInfo();
+  };
+
+  const acceptFriendRequest = async (sender, receiver) => {
+    const response = await axios.post("/acceptFriendRequest", {
+      senderId: sender,
+      receiverId: receiver,
+    });
+    getFriendRequestInfo();
+  };
   // ---------------------------- Account Details ----------------------------
 
   const handleChange = (event, newValue) => {
@@ -333,8 +361,17 @@ const UserProfile = () => {
                   </div>
                   <div className="connection-container">
                     {isFriend === 1 ? (
-                      ""
-                    ) : reqSent === 1 && reqStatus !== "rejected" ? (
+                      <Button
+                        style={{ height: "50%" }}
+                        variant="outlined"
+                        color="primary"
+                        onClick={() =>
+                          removeFriend(cookies.Email, cookies.Email)
+                        }
+                      >
+                        Remove friend
+                      </Button>
+                    ) : sentReq === 1 ? (
                       <>
                         <ThemeProvider theme={theme}>
                           <Fab
@@ -346,16 +383,25 @@ const UserProfile = () => {
                             <ClearIcon />
                           </Fab>
                         </ThemeProvider>
-                        {/* <ThemeProvider theme={greenTheme}>
-                          <Fab
-                            className="add-availability"
-                            color="primary"
-                            aria-label="add"
-                            onClick={handleAddAvailability}
-                          >
-                            <HowToRegIcon />
-                          </Fab>
-                        </ThemeProvider> */}
+                      </>
+                    ) : recieveReq === 1 ? (
+                      <>
+                        <Button
+                          style={{ height: "50%" }}
+                          variant="outlined"
+                          color="primary"
+                          onClick={() => acceptFriendRequest()}
+                        >
+                          Accept
+                        </Button>
+                        <Button
+                          style={{ height: "50%" }}
+                          variant="outlined"
+                          color="secondary"
+                          onClick={() => rejectFriendRequest()}
+                        >
+                          Decline
+                        </Button>
                       </>
                     ) : (
                       <ThemeProvider theme={greenTheme}>

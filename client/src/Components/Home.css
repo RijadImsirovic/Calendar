@@ -27,7 +27,8 @@
 .middle-section{
     height: 100%;
     display: flex;
-    padding: 60px 110px;
+    padding-top: 25px;
+    padding-left: 25px;
     margin-bottom: 87px;
 
 }
@@ -39,8 +40,11 @@
 }
 
 .box-2{
-    flex-basis: 50%;
+    /* flex-basis: 50%; */
+    width: 90%;
     padding: 1rem;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
 .box-3, .box-4{
@@ -53,4 +57,8 @@
 
 .box-4{
     flex-grow: 2;
+}
+
+.Calendar{
+    width: 100%;
 }
