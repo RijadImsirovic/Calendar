@@ -44,7 +44,6 @@ const UserProfile = () => {
   const { username } = useParams();
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const location = useLocation();
-  console.log(location);
   const signOut = () => {
     removeCookie("Name");
     removeCookie("Email");
@@ -70,11 +69,9 @@ const UserProfile = () => {
   const [recieveReq, setRecieveReq] = useState(null);
   const [sentReq, setSentReq] = useState(null);
 
-
   // ------------------------------- FRIENDS ------------------------------------
 
   const sendFriendRequest = async () => {
-    console.log(username);
     const response = await axios.post("/sendFriendRequest", {
       senderId: cookies.Email,
       receiverId: username,
@@ -87,7 +84,6 @@ const UserProfile = () => {
       const url = `/getFriendRequestInfo/${cookies.Email}/${username}`;
 
       const response = await axios.get(url);
-      console.log(response);
 
       if (response.data.friendship.length === 0) {
         setIsFriend(0);
@@ -109,7 +105,6 @@ const UserProfile = () => {
       } else {
         setSentReq(1);
       }
-
     } catch (err) {
       console.error(err);
     }
@@ -157,7 +152,7 @@ const UserProfile = () => {
     userEmail = email;
     setBackupDesc(description);
     setBackupCal(publicCalendar);
-    console.log(publicCalendar);
+
     setCookie("Email", userEmail);
     setCookie("Name", userName);
 
@@ -168,7 +163,6 @@ const UserProfile = () => {
       newDescription: description,
       newToggle: publicCalendar,
     });
-    console.log(response);
   };
 
   const handleFileChange = (event) => {
@@ -188,7 +182,6 @@ const UserProfile = () => {
     });
     setModalShow(false);
     getProfilePicture();
-    console.log(response);
   };
 
   const getProfilePicture = async () => {
@@ -216,7 +209,6 @@ const UserProfile = () => {
       const url = `/getProfileSettings/${username}`;
 
       const response = await axios.get(url);
-      console.log(response);
 
       setName(response.data.basicSettings[0].name);
       setEmail(response.data.basicSettings[0].email);
@@ -249,7 +241,6 @@ const UserProfile = () => {
       ...availability,
       { day: "Monday", startTime: null, endTime: null },
     ]);
-    console.log(availability);
   };
 
   const handleRemoveAvailability = (index) => {
@@ -321,9 +312,7 @@ const UserProfile = () => {
               </Tabs>
 
               <TabPanel className="account-info-container" value="1" index={0}>
-                {/* <Avatar className='profile-image' alt="Remy Sharp" src={logo} /> */}
                 <Paper className="basic-details" elevation={10}>
-                  {/* <div className="basic-details"> */}
                   <div className="basic-title">
                     <h2>Basic account info</h2>
                   </div>
@@ -331,7 +320,6 @@ const UserProfile = () => {
                     <Avatar
                       className="profile-image"
                       alt="Remy Sharp"
-                      // src={logo}
                       src={`data:image/jpeg;base64,${imageData}`}
                     />
                   </div>
@@ -416,7 +404,6 @@ const UserProfile = () => {
                       </ThemeProvider>
                     )}
                   </div>
-                  {/* </div> */}
                 </Paper>
                 <Paper className="edit-details" elevation={10}>
                   <div className="edit-details-title">
@@ -449,10 +436,7 @@ const UserProfile = () => {
                     />
                   </div>
                 </Paper>
-                {/* <div className="edit-details"></div> */}
               </TabPanel>
-
-              {/* AVAILABILITY */}
 
               <TabPanel value="2" index={1}>
                 <Paper
@@ -534,9 +518,6 @@ const UserProfile = () => {
                     </LocalizationProvider>
                   ))}
                   <div className="add-availability-container">
-                    {/* <Button variant="outlined" onClick={handleAddAvailability}>
-                                            Add Availability
-                                        </Button> */}
                     <ThemeProvider theme={greenTheme}>
                       <Fab
                         className="add-availability"
@@ -551,10 +532,7 @@ const UserProfile = () => {
                 </Paper>
               </TabPanel>
 
-              {/* CALENDAR */}
-
               <TabPanel value="3" index={2}>
-                {/* Item Three */}
                 <CalendarCo email={email} />
               </TabPanel>
             </TabContext>

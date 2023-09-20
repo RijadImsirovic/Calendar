@@ -34,10 +34,8 @@ const TopSection = () => {
       const url = `/searchUsers/${query}`;
 
       const response = await axios.get(url);
-      console.log(response);
 
       setSearchResults(response.data);
-      console.log(searchResults);
     }
   };
 
@@ -46,7 +44,7 @@ const TopSection = () => {
       const url = `/getImage/${cookies.Email}`;
 
       const response = await axios.get(url, {
-        responseType: "arraybuffer", // Indicate that the response is binary data
+        responseType: "arraybuffer",
       });
 
       const data = btoa(
@@ -107,7 +105,6 @@ const TopSection = () => {
         <Avatar
           className="home-profile-image"
           alt="Remy Sharp"
-          // src={logo}
           src={`data:image/jpeg;base64,${imageData}`}
         />
       </Typography>

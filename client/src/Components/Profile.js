@@ -39,7 +39,6 @@ import TopSection from "./TopSection";
 const Profile = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const location = useLocation();
-  console.log(location);
   const signOut = () => {
     removeCookie("Name");
     removeCookie("Email");
@@ -73,7 +72,7 @@ const Profile = () => {
     userEmail = email;
     setBackupDesc(description);
     setBackupCal(publicCalendar);
-    console.log(publicCalendar);
+
     setCookie("Email", userEmail);
     setCookie("Name", userName);
 
@@ -84,7 +83,6 @@ const Profile = () => {
       newDescription: description,
       newToggle: publicCalendar,
     });
-    console.log(response);
   };
 
   const handleFileChange = (event) => {
@@ -104,7 +102,6 @@ const Profile = () => {
     });
     setModalShow(false);
     getProfilePicture();
-    console.log(response);
   };
 
   const getProfilePicture = async () => {
@@ -160,7 +157,6 @@ const Profile = () => {
       ...availability,
       { day: "Monday", startTime: null, endTime: null },
     ]);
-    console.log(availability);
   };
 
   const handleRemoveAvailability = (index) => {
@@ -173,7 +169,6 @@ const Profile = () => {
     const updatedAvailability = [...availability];
     updatedAvailability[index][field] = value;
     setAvailability(updatedAvailability);
-    console.log(availability)
   };
 
   // ---------------------------- THEME ----------------------------
@@ -233,9 +228,7 @@ const Profile = () => {
               </Tabs>
 
               <TabPanel className="account-info-container" value="1" index={0}>
-                {/* <Avatar className='profile-image' alt="Remy Sharp" src={logo} /> */}
                 <Paper className="basic-details" elevation={10}>
-                  {/* <div className="basic-details"> */}
                   <div className="basic-title">
                     <h2>Basic account info</h2>
                   </div>
@@ -243,7 +236,6 @@ const Profile = () => {
                     <Avatar
                       className="profile-image"
                       alt="Remy Sharp"
-                      // src={logo}
                       src={`data:image/jpeg;base64,${imageData}`}
                     />
                     <Button
@@ -312,7 +304,6 @@ const Profile = () => {
                     </List>
                   </div>
                   <div className="connection-container"></div>
-                  {/* </div> */}
                 </Paper>
                 <Paper className="edit-details" elevation={10}>
                   <div className="edit-details-title">
@@ -376,10 +367,7 @@ const Profile = () => {
                     )}
                   </div>
                 </Paper>
-                {/* <div className="edit-details"></div> */}
               </TabPanel>
-
-              {/* AVAILABILITY */}
 
               <TabPanel value="2" index={1}>
                 <Paper
@@ -461,9 +449,6 @@ const Profile = () => {
                     </LocalizationProvider>
                   ))}
                   <div className="add-availability-container">
-                    {/* <Button variant="outlined" onClick={handleAddAvailability}>
-                                            Add Availability
-                                        </Button> */}
                     <ThemeProvider theme={greenTheme}>
                       <Fab
                         className="add-availability"
@@ -478,11 +463,8 @@ const Profile = () => {
                 </Paper>
               </TabPanel>
 
-              {/* CALENDAR */}
-
               <TabPanel value="3" index={2}>
-                {/* Item Three */}
-                <CalendarCo email={email}/>
+                <CalendarCo email={email} />
               </TabPanel>
             </TabContext>
           </Paper>

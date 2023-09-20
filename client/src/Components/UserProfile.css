@@ -1,242 +1,232 @@
-.profile-content-container{
-    flex-direction: column;
+.profile-content-container {
+  flex-direction: column;
 }
 
-.main-profile-container{
-    padding: 30px 120px;
-    height: 100%;
+.main-profile-container {
+  padding: 30px 120px;
+  height: 100%;
 }
 
-.profile-tabs{
-    height: 85%;
-    background-color: transparent !important;
-    box-shadow: none !important;
+.profile-tabs {
+  height: 85%;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 /* ---------------- Profile Details ----------------*/
 
-.account-info-container{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+.account-info-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 /* ---------------- Left Panel ---------------- */
 
-.basic-details{
-    /* border: 1px solid; */
-    height: 95%;
-    padding: 0;
-    margin: 0;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    margin: 0 12px;
-    border-radius: 20px !important;
-    background-color: #f2f2f2 !important;
+.basic-details {
+  height: 95%;
+  padding: 0;
+  margin: 0;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 12px;
+  border-radius: 20px !important;
+  background-color: #f2f2f2 !important;
 }
 
-.basic-title{
- flex: 1;
- /* border: 1px solid ; */
+.basic-title {
+  flex: 1;
 }
 
-.basic-title h2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.basic-title h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.avatar-container{
-flex: 2;
-/* border: 1px solid ; */
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
+.avatar-container {
+  flex: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.profile-image{
-    height: 170px !important;
-    width: 170px !important;
-    border: 1px solid black;
+.profile-image {
+  height: 170px !important;
+  width: 170px !important;
+  border: 1px solid black;
 }
 
-.change-profile-image{
-    border-color: rgb(70, 182, 164) !important;
-    color: rgb(70, 182, 164) !important;
-    border-radius: 25px !important;
-    margin-top: 25px !important;
+.change-profile-image {
+  border-color: rgb(70, 182, 164) !important;
+  color: rgb(70, 182, 164) !important;
+  border-radius: 25px !important;
+  margin-top: 25px !important;
 }
 
-.change-profile-image:hover{
-    border-color: rgb(70, 182, 164) !important;
-    background-color: rgb(70, 182, 164) !important;
-    color: #f2f2f2 !important;
+.change-profile-image:hover {
+  border-color: rgb(70, 182, 164) !important;
+  background-color: rgb(70, 182, 164) !important;
+  color: #f2f2f2 !important;
 }
 
-.basic-info{
-flex: 2;
-/* border: 1px solid ; */
-display: flex;
-justify-content: center;
+.basic-info {
+  flex: 2;
+
+  display: flex;
+  justify-content: center;
 }
 
-.basic-info-list{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.basic-info-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.basic-info ul li{
-    text-align: center;
+.basic-info ul li {
+  text-align: center;
 }
 
-.basic-info-icon{
-    height: 2rem !important;
-    width: 4rem !important;
+.basic-info-icon {
+  height: 2rem !important;
+  width: 4rem !important;
 }
 
-.connection-container{
-flex: 1;
-/* border: 1px solid ; */
+.connection-container {
+  flex: 1;
 }
 
 /* ---------------- Right Panel ---------------- */
 
-.edit-details{
-    height: 95%;
-    width: 60%;
-    margin: 0 50px;
-    border-radius: 20px !important;
-    background-color: #f2f2f2 !important;
-    display: flex;
-    flex-direction: column;
+.edit-details {
+  height: 95%;
+  width: 60%;
+  margin: 0 50px;
+  border-radius: 20px !important;
+  background-color: #f2f2f2 !important;
+  display: flex;
+  flex-direction: column;
 }
 
-.edit-details-title{
-    flex: 1;
-    /* border: 1px solid; */
+.edit-details-title {
+  flex: 1;
 }
 
-.edit-details-title h2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.edit-details-title h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.edit-main-container{
-    flex: 8;
-    /* border: 1px solid; */
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+.edit-main-container {
+  flex: 8;
+
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
-.edit-main-container div{
-    margin: 5px;
+.edit-main-container div {
+  margin: 5px;
 }
 
-.edit-buttons-container{
-    flex: 1;
-    /* border: 1px solid; */
+.edit-buttons-container {
+  flex: 1;
 }
 
-.public-switch{
-    padding: 5px;
+.public-switch {
+  padding: 5px;
 }
 
-.additional-settings-title{
-    justify-content: center;
-    display: flex;
-    margin-top: 10px;
+.additional-settings-title {
+  justify-content: center;
+  display: flex;
+  margin-top: 10px;
 }
 
-.change-password{
-    place-self: center;
-    border-color: rgb(70, 182, 164) !important;
-    color: rgb(70, 182, 164) !important;
-    border-radius: 25px !important;
-    margin-top: 25px !important;
-    width: 40%;
-    margin-top: 0 !important;
-    background-color: white !important;
+.change-password {
+  place-self: center;
+  border-color: rgb(70, 182, 164) !important;
+  color: rgb(70, 182, 164) !important;
+  border-radius: 25px !important;
+  margin-top: 25px !important;
+  width: 40%;
+  margin-top: 0 !important;
+  background-color: white !important;
 }
 
-.change-password:hover{
-    border-color: rgb(70, 182, 164) !important;
-    background-color: rgb(70, 182, 164) !important;
-    color: #f2f2f2 !important;
+.change-password:hover {
+  border-color: rgb(70, 182, 164) !important;
+  background-color: rgb(70, 182, 164) !important;
+  color: #f2f2f2 !important;
 }
 
-label.Description123+div{
-    background-color: white !important;
+label.Description123 + div {
+  background-color: white !important;
 }
 
 /* ---------------- AVAILABILITY ---------------- */
 
-.availability-container{
-    border-radius: 20px !important;
+.availability-container {
+  border-radius: 20px !important;
 }
 
-.availability-main{
-display: flex;
-width: 100%;
-margin: 20px 0;
+.availability-main {
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
 }
 
-.availability-inputs{
-    /* border: 1px solid; */
-    width: 90%;
+.availability-inputs {
+  width: 90%;
 }
 
-.availability-input-buttons{
-    /* border: 1px solid; */
-    width: 10%;
-    justify-content: end;
-    display: flex;
+.availability-input-buttons {
+  width: 10%;
+  justify-content: end;
+  display: flex;
 }
 
-.select-availability, .timepicker-from, .timepicker-to, .remove-availability {
-    margin-right: 20px !important;
+.select-availability,
+.timepicker-from,
+.timepicker-to,
+.remove-availability {
+  margin-right: 20px !important;
 }
 
-.select-availability{
-    width: 30%;
+.select-availability {
+  width: 30%;
 }
 
-.timepicker-from{
-    width: 30%;
+.timepicker-from {
+  width: 30%;
 }
 
-.timepicker-to{
-    width: 30%;
+.timepicker-to {
+  width: 30%;
 }
 
-/* .remove-availability{
-    justify-content: end;
-    display: flex;
-} */
-
-.add-availability-container{
-    /* border: 1px solid; */
-    justify-content: end;
-    display: flex;
-    margin: 0 20px
+.add-availability-container {
+  justify-content: end;
+  display: flex;
+  margin: 0 20px;
 }
 
-.add-availability{
-    color: #f2f2f2 !important;
+.add-availability {
+  color: #f2f2f2 !important;
 }
 
-.connection-container{
-    display: flex;
-    justify-content: center;
+.connection-container {
+  display: flex;
+  justify-content: center;
 }
 
-.connection-container button{
-    margin: 0 20px
+.connection-container button {
+  margin: 0 20px;
 }

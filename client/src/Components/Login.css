@@ -1,85 +1,83 @@
-.login-container{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: transform 0.6s ease-in-out;
-    width: 100%;
-    opacity: 1;
-    z-index: 1;
-    background-color: #f2f2f2;
+.login-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
+  opacity: 1;
+  z-index: 1;
+  background-color: #f2f2f2;
 }
 
-.log-subtitle{
-    margin: 10px 0;
+.log-subtitle {
+  margin: 10px 0;
 }
 
-.form-container{
-    margin: 20px 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.form-container {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.form-container input{
-    margin: 10px 0;
-    width: 50%;
+.form-container input {
+  margin: 10px 0;
+  width: 50%;
 }
 
-.form-container Button{
-    width: 30%;
-    border-radius: 25px;
-    background-color: rgb(70, 182, 164);
-    color: white;
-    border: none;
-    font-family: 'DM Sans', sans-serif !important;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    margin: 10px 0;
+.form-container Button {
+  width: 30%;
+  border-radius: 25px;
+  background-color: rgb(70, 182, 164);
+  color: white;
+  border: none;
+  font-family: "DM Sans", sans-serif !important;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  margin: 10px 0;
 }
 
-.form-container Button:hover{
-    border: none;
-    background-color: rgb(70, 182, 164);
-    color: white;
+.form-container Button:hover {
+  border: none;
+  background-color: rgb(70, 182, 164);
+  color: white;
 }
 
 .welcome-button:hover,
 .welcome-button:focus {
-    /* animation: pulse 1.5s; */
-    -webkit-animation-name: pulse-grow-on-hover;
-    animation-name: pulse-grow-on-hover;
-    -webkit-animation-duration: 0.3s;
-    animation-duration: 0.3s;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-animation-direction: alternate;
-    animation-direction: alternate;
+  -webkit-animation-name: pulse-grow-on-hover;
+  animation-name: pulse-grow-on-hover;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
 }
 
 @-webkit-keyframes pulse-grow-on-hover {
-    to {
-      -webkit-transform: scale(1.1);
-      transform: scale(1.1);
-    }
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
   }
-  @keyframes pulse-grow-on-hover {
-    to {
-      -webkit-transform: scale(1.1);
-      transform: scale(1.1);
-    }
+}
+@keyframes pulse-grow-on-hover {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
   }
-
-
-  .flipAuth-container{
-    transform: translateX(-100%);
 }
 
-.unflipAuth-container{
-    transform: translateX(0%);
+.flipAuth-container {
+  transform: translateX(-100%);
+}
+
+.unflipAuth-container {
+  transform: translateX(0%);
 }

@@ -140,20 +140,16 @@ function ConnectionsPage() {
               </Tabs>
 
               <TabPanel className="account-info-container" value="1" index={0}>
-                {/* <ConnectionsList /> */}
                 <Paper elevation={3} style={{ padding: "16px", width: "100%" }}>
                   <Typography variant="h6" gutterBottom>
                     Connections
                   </Typography>
                   <Divider />
                   <List>
-                    {/* Replace with your sent friend requests data */}
                     {friendships.map((item) => (
-                      // <li key={item.id}>{item.name}</li>
-
                       <ListItem>
-                      <ListItemText>{item.friend_name}</ListItemText>
-                        {/* <ListItemText primary={item.friend_name} /> */}
+                        <ListItemText>{item.friend_name}</ListItemText>
+
                         <ListItemText primary={item.friend_email} />
                         <ListItemSecondaryAction>
                           <Button
@@ -188,10 +184,7 @@ function ConnectionsPage() {
                   </Typography>
                   <Divider />
                   <List>
-                    {/* Replace with your sent friend requests data */}
                     {sentReq.map((item) => (
-                      // <li key={item.id}>{item.name}</li>
-
                       <ListItem>
                         <ListItemText primary={item.receiver_username} />
                         <ListItemText primary={item.receiver_mail} />

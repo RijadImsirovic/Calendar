@@ -40,8 +40,6 @@ export default function CalendarCo({ email }) {
 
   const handleChange = (color) => {
     setColor(color.hex);
-    console.log(color.hex);
-    console.log(events);
   };
 
   const handleAddEvent = async (e) => {
@@ -77,7 +75,7 @@ export default function CalendarCo({ email }) {
       const url = `/getEvents/${email}`;
 
       const response = await axios.get(url);
-      console.log(response.data.events);
+
       if (response.data.detail) {
         setError(response.data.detail);
       } else {
@@ -100,7 +98,6 @@ export default function CalendarCo({ email }) {
   useEffect(() => {
     if (authToken) {
       getEvents();
-      console.log(events);
     }
   }, []);
 

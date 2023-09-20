@@ -33,7 +33,7 @@ const Login = ({flipEffect }) => {
       navigate('/home');
     }
   }
-  // ${flipEffect ? 'flipAuth-container' : 'unflipAuth-container'}
+ 
   return (
       <div className={`login-container`}>
         <h2 className='log-title'>Sign in</h2>
