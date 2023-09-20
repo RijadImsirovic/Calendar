@@ -22,7 +22,6 @@ const localizer = dayjsLocalizer(dayjs);
 const DnDCalendar = withDragAndDrop(Calendar);
 
 export default function CalendarCo({ email }) {
-  console.log(email);
   const [cookies, setCookie, removeCookie] = useCookies(["Email"]);
   const authToken = cookies.AuthToken;
   const userEmail = cookies.Email;

@@ -57,14 +57,10 @@ function ConnectionsPage() {
       const url = `/getPersonalFriendRequestInfo/${cookies.Email}`;
 
       const response = await axios.get(url);
-      console.log(response);
 
       setSentReq(response.data.sentRequests);
       setRecReq(response.data.receivedRequests);
       setFriendships(response.data.friendships);
-
-      console.log(sentReq);
-      console.log("test");
     } catch (err) {
       console.error(err);
     }
